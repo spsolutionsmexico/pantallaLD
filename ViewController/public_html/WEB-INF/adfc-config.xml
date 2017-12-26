@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <view id="casoPLD">
+    <page>/casoPLD.jspx</page>
+  </view>
+  <managed-bean id="__1">
+    <managed-bean-name>ConsultarWS</managed-bean-name>
+    <managed-bean-class>Beans.ConsultarWS</managed-bean-class>
+    <managed-bean-scope>pageFlow</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__7">
+    <managed-bean-name>Caso</managed-bean-name>
+    <managed-bean-class>Beans.Caso</managed-bean-class>
+    <managed-bean-scope>pageFlow</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__8">
+    <managed-bean-name>Alerta</managed-bean-name>
+    <managed-bean-class>Beans.Alerta</managed-bean-class>
+    <managed-bean-scope>pageFlow</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__9">
+    <managed-bean-name>CasoRelacionado</managed-bean-name>
+    <managed-bean-class>Beans.CasoRelacionado</managed-bean-class>
+    <managed-bean-scope>pageFlow</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__10">
+    <managed-bean-name>Comentario</managed-bean-name>
+    <managed-bean-class>Beans.Comentario</managed-bean-class>
+    <managed-bean-scope>pageFlow</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__11">
+    <managed-bean-name>DetalleCaso</managed-bean-name>
+    <managed-bean-class>Beans.DetalleCaso</managed-bean-class>
+    <managed-bean-scope>pageFlow</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__12">
+    <managed-bean-name>DetalleCliente</managed-bean-name>
+    <managed-bean-class>Beans.DetalleCliente</managed-bean-class>
+    <managed-bean-scope>pageFlow</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__13">
+    <managed-bean-name>Documento</managed-bean-name>
+    <managed-bean-class>Beans.Documento</managed-bean-class>
+    <managed-bean-scope>pageFlow</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__14">
+    <managed-bean-name>Ususario</managed-bean-name>
+    <managed-bean-class>Beans.Usuario</managed-bean-class>
+    <managed-bean-scope>pageFlow</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__2">
+    <managed-bean-name>expedienteDetalleCaso</managed-bean-name>
+    <managed-bean-class>view.backing.ExpedienteDetalleCaso</managed-bean-class>
+    <managed-bean-scope>backingBean</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__3">
+    <managed-bean-name>GetInfoCaso</managed-bean-name>
+    <managed-bean-class>Beans.GetInfoCaso</managed-bean-class>
+    <managed-bean-scope>pageFlow</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

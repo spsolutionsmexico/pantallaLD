@@ -1,0 +1,765 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="viewcontrollerBundle" value="#{adfBundle['view.ViewControllerBundle']}"/>
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="casoPLD" id="d1">
+            <af:form id="f1" usesUpload="true">
+                <!-- esqueleto -->
+                <af:panelGridLayout id="grid" dimensionsFrom="children">
+                                <af:gridRow id="rowData" height="auto" marginTop="4px" marginBottom="4px">
+                                    <af:gridCell id="dataCell" valign="middle" marginStart="4px"
+                                                 halign="stretch">
+                                        <af:panelGridLayout id="gridFormDetalle" dimensionsFrom="parent">
+                                            <af:gridRow id="rowEncabezadoDetalle" height="auto" marginTop="4px"
+                                                        marginBottom="4px">
+                                                <af:gridCell id="logoCellDetalle" width="20%" valign="middle"
+                                                             marginStart="4px">
+                                                    <af:image id="imglogoDetalle"
+                                                              shortDesc="NMP Logo"
+                                                              source="/Resources/images/imgNMPLogo2.png"/>
+                                                </af:gridCell>
+                                                <af:gridCell id="tituloDetalleCell" width="60%" halign="center"
+                                                             valign="middle">
+                                                    <af:outputText id="txtTituloDetalle"
+                                                                   inlineStyle="font-size:large;"
+                                                                   value="#{pageFlowScope.p_tituloRol}"/>
+                                                </af:gridCell>
+                                                <af:gridCell id="emptyCellDet_1" width="20%" valign="middle"
+                                                             marginEnd="4px" halign="center">
+                                                    <af:panelGroupLayout layout="horizontal" id="pgSave"
+                                                                         visible="false"/>
+                                                </af:gridCell>
+                                            </af:gridRow>
+                                        </af:panelGridLayout>
+                                    </af:gridCell>
+                                </af:gridRow>
+                                <af:gridRow id="rowDen" height="100%" marginTop="4px" marginBottom="4px">
+                                    <af:gridCell id="denCell" width="100%" valign="middle" marginStart="4px"
+                                                 halign="stretch">
+                                       
+                                                <af:panelTabbed id="pntDenominaciones" 
+                                                                styleClass="AFStretchWidth">
+                                                    <!-- ============================  DETALLE CASO  ======================= -->
+                                                    <af:showDetailItem text="Detalle Caso" id="sdi1"
+                                                                       styleClass="AFStretchWidth">
+                                    <af:outputText value="ID Caso:  #{pageFlowScope.Caso.idCaso}" id="ot35"/>
+                                    <af:switcher id="swtDetalleCaso">
+                                                            <f:facet name="AnalizarCaso">
+                                                               
+                                                                <af:panelGridLayout id="gridFormAnalizarCaso">
+                                                                    <af:gridRow id="grAc_1" height="auto"
+                                                                                marginTop="4px" marginBottom="4px">
+                                                                        <af:gridCell id="gcAc_11" width="20%"
+                                                                                     valign="middle" marginStart="4px"
+                                                                                     halign="end">
+                                                                            <af:outputLabel id="lblAc_11"
+                                                                                            value="Id Caso:  "/>
+                                                                          
+                                                                        </af:gridCell>
+                                                                        <af:gridCell id="gcAc_12" width="20%"
+                                                                                     valign="middle" marginStart="4px">
+                                                                            <af:outputText id="txtAc_IdCaso"/>
+                                                                        </af:gridCell>
+                                                                    </af:gridRow>
+                                                                </af:panelGridLayout>
+                                                            </f:facet>
+                                                            <f:facet name="DocumentarCaso">
+                                                                <af:panelGridLayout id="gridFormDocuCaso"/>
+                                                            </f:facet>
+                                                            <f:facet name="AnalisisCalif">
+                                                                <af:panelGridLayout id="gridFormAnalizarCalif">
+                                                                    <af:gridRow id="grAca_8" height="auto"
+                                                                                marginTop="4px" marginBottom="4px">
+                                                                        <af:gridCell id="gcAca_81" width="20%"
+                                                                                     valign="middle" marginStart="4px"
+                                                                                     halign="center" columnSpan="5">
+                                                                            <af:toolbar id="tlbAca">
+                                                                                <af:button text="Aprobar Cambio"
+                                                                                           id="btnAprobarCambio"/>
+                                                                                <af:button text="Rechazar Cambio"
+                                                                                           id="btnRechazarCambio"/>
+                                                                            </af:toolbar>
+                                                                        </af:gridCell>
+                                                                    </af:gridRow>
+                                                                </af:panelGridLayout>
+                                                            </f:facet>
+                                                            <f:facet name="AprobarAlerta">
+                                                                <af:panelGridLayout id="gridFormAprobarCaso">
+                                                                    <af:gridRow id="grAp_8" height="auto"
+                                                                                marginTop="4px" marginBottom="4px">
+                                                                        <af:gridCell id="gcAp_81" width="20%"
+                                                                                     valign="middle" marginStart="4px"
+                                                                                     halign="center" columnSpan="5">
+                                                                            <af:toolbar id="tlbAp">
+                                                                                <af:button text="Retornar Tarea"
+                                                                                           id="btnApRetorna"
+                                                                                           />
+                                                                            </af:toolbar>
+                                                                        </af:gridCell>
+                                                                    </af:gridRow>
+                                                                </af:panelGridLayout>
+                                                            </f:facet>
+                                                            <f:facet name="CasoAsignado"></f:facet>
+                                                        </af:switcher>
+                                    <af:popup childCreation="deferred" autoCancel="disabled"
+                                                                  id="ppConfirmaAccion"
+                                                                  >
+                                                            <af:dialog id="d212" 
+                                                                       type="cancel"
+                                                                       affirmativeTextAndAccessKey="Aplicar"
+                                                                       cancelTextAndAccessKey="Cancelar">
+                                                                <f:facet name="buttonBar">
+                                                                    <af:button 
+                                                                               id="b72"
+                                                                               partialTriggers="sbcConfirmaAccion"
+                                                                               
+                                                                               />
+                                                                </f:facet>
+                                                                <af:panelGroupLayout id="pgl52" layout="vertical">
+                                                                    <af:selectBooleanCheckbox label="Confirmar acci&#243;n"
+                                                                                              id="sbcConfirmaAccion"
+                                                                                              
+                                                                                              
+                                                                                              autoSubmit="true"
+                                                                                              />
+                                                                </af:panelGroupLayout>
+                                                                <af:panelStretchLayout id="psl212"
+                                                                                       inlineStyle="width:480px; height:30px;"
+                                                                                       startWidth="5px" endWidth="5px"
+                                                                                       topHeight="5px"
+                                                                                       bottomHeight="5px">
+                                                                    <f:facet name="center">
+                                                                        <af:panelGroupLayout id="pgl1821" halign="left"
+                                                                                             valign="middle"
+                                                                                             styleClass="AFStretchWidth"
+                                                                                             layout="vertical"/>
+                                                                    </f:facet>
+                                                                </af:panelStretchLayout>
+                                                            </af:dialog>
+                                                        </af:popup>
+                                                        <af:popup childCreation="deferred" autoCancel="disabled"
+                                                                  id="popupAccionTD"
+                                                                  >
+                                                            <af:dialog id="d21TD" 
+                                                                       type="cancel"
+                                                                       
+                                                                       affirmativeTextAndAccessKey="Aceptar"
+                                                                       cancelTextAndAccessKey="Cancelar">
+                                                                <f:facet name="buttonBar">
+                                                                    <af:button text="Aceptar" id="b7TD"
+                                                                               partialTriggers="sbcTD"
+                                                                               
+                                                                               />
+                                                                </f:facet>
+                                                                <af:panelGroupLayout id="pgl5TD" layout="vertical">
+                                                                    <af:spacer width="10" height="10" id="s15TD"/>
+                                                                    <af:panelGroupLayout id="pgl9TD" halign="center"
+                                                                                         valign="middle"
+                                                                                         styleClass="AFStretchWidth">
+                                                                        <af:outputLabel value="ERROR: El motivo de la operaci&#243;n es requerido."
+                                                                                        id="ol2TD"
+                                                                                        inlineStyle="color:Red; font-size:medium;"
+                                                                                        />
+                                                                    </af:panelGroupLayout>
+                                                                    <af:spacer width="10" height="10" id="s16TD"/>
+                                                                    <af:inputText 
+                                                                                  id="it7TD" columns="100"
+                                                                                  rows="4"
+                                                                                  
+                                                                                  
+                                                                                  maximumLength="4000"/>
+                                                                    <af:selectBooleanCheckbox 
+                                                                                              id="sbcTD"
+                                                                                              
+                                                                                              
+                                                                                              autoSubmit="true"
+                                                                                              />
+                                                                </af:panelGroupLayout>
+                                                                <af:panelStretchLayout id="psl21TD"
+                                                                                       inlineStyle="width:480px; height:30px;"
+                                                                                       startWidth="5px" endWidth="5px"
+                                                                                       topHeight="5px"
+                                                                                       bottomHeight="5px">
+                                                                    <f:facet name="center">
+                                                                        <af:panelGroupLayout id="pgl181TD" halign="left"
+                                                                                             valign="middle"
+                                                                                             styleClass="AFStretchWidth"
+                                                                                             layout="vertical"/>
+                                                                    </f:facet>
+                                                                </af:panelStretchLayout>
+                                                            </af:dialog>
+                                                        </af:popup>
+                                </af:showDetailItem>
+                                                    <!-- ============================================   TAB ALERTAS =================================================== -->
+                                                    <af:showDetailItem text="Alertas" id="sdi2"
+                                                                       stretchChildren="first">
+                                                        <af:button 
+                                                                   partialSubmit="true" id="b2" rendered="false"/>
+                                                        <af:button 
+                                                                   text="obtenerTotalScore"
+                                                                   id="b4" rendered="false"/>
+                                                        <af:panelGroupLayout id="pgl1" layout="vertical">
+                                                            <af:button id="expAlertas" immediate="true"
+                                                                       text="Exportar a Excel"/>
+                                                            <af:panelCollection id="pcAltr"
+                                                                                featuresOff="statusBar viewMenu formatMenu columnsMenuItem freezeMenuItem detachMenuItem sortMenuItem reorderColumnsMenuItem resizeColumnsMenuItem wrapMenuItem freezeToolbarItem  wrapToolbarItem freeze wrap"
+                                                                                styleClass="AFStretchWidth">
+                                            <af:table value="#{pageFlowScope.Caso.alertas}" var="row"
+                                                      rowBandingInterval="0" id="t1">
+                                                <af:column sortable="false" headerText="Sel" align="start"
+                                                           id="c1">
+                                                    <af:selectBooleanCheckbox id="sbc1"
+                                                                              value="#{row.seleccionado}"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Id" align="end" id="c2">
+                                                    <af:outputText value="#{row.id}" id="ot2"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Fecha Registro" align="start"
+                                                           id="c3">
+                                                    <af:outputText value="#{row.fechaRegistro}" id="ot3"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Tipo Alerta" align="start"
+                                                           id="c4">
+                                                    <af:outputText value="#{row.tipoAlerta}" id="ot4"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Valida" align="start" id="c5">
+                                                    <af:outputText value="#{row.valida}" id="ot5"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Calificacion" align="start"
+                                                           id="c6">
+                                                    <af:outputText value="#{row.calificacion}" id="ot6"/>
+                                                </af:column>
+                                            </af:table>
+                                        </af:panelCollection>
+                                                        </af:panelGroupLayout>
+                                                        <af:spacer width="10" height="10" id="s1"/>
+                                                        <af:panelGroupLayout id="pgl3" layout="vertical" halign="end"
+                                                                             inlineStyle="font-size:small;">
+                                                            <af:panelGroupLayout id="pgl4" layout="horizontal">
+                                                                <af:outputText value="Calificaci&#243;n de Caso :"
+                                                                               id="ot15"
+                                                                               inlineStyle="color:Maroon; font-weight:bold; font-size:large;"
+                                                                               partialTriggers="b7 b3"/>
+                                                                <af:spacer width="20" height="10" id="s4"/>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                        <af:panelGroupLayout id="pgl2" layout="vertical">
+                                                            <af:toolbar id="t2">
+                                                                <af:button text="Cambiar Tipificaci&#243;n" id="b1"
+                                                                           
+                                                                           
+                                                                           disabled="true"/>
+                                                                <af:spacer width="10" height="10" id="s5"/>
+                                                                <af:button text="Aprobar" id="b5"
+                                                                           
+                                                                           
+                                                                           disabled="true"/>
+                                                                <af:spacer width="10" height="10" id="s6"/>
+                                                                <af:button text="Descartar" id="b6"
+                                                                           
+                                                                           
+                                                                           disabled="true"/>
+                                                            </af:toolbar>
+                                                        </af:panelGroupLayout>
+                                                        <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                                                  >
+                                                            <af:dialog id="d2" 
+                                                                       type="cancel" title="Cambiar Tipificaci&#243;n"
+                                                                       affirmativeTextAndAccessKey="Aplicar"
+                                                                       cancelTextAndAccessKey="Cancelar">
+                                                                <f:facet name="buttonBar">
+                                                                    <af:button text="Cambiar" id="b3"
+                                                                               
+                                                                               partialTriggers="sbc2"/>
+                                                                </f:facet>
+                                                                <af:panelStretchLayout id="psl2"
+                                                                                       inlineStyle="width:480px; height:30px;"
+                                                                                       startWidth="5px" endWidth="5px"
+                                                                                       topHeight="5px"
+                                                                                       bottomHeight="5px">
+                                                                    <f:facet name="center">
+                                                                        <af:panelGroupLayout id="pgl18" halign="left"
+                                                                                             valign="middle"
+                                                                                             styleClass="AFStretchWidth">
+                                                                            <af:spacer width="10" height="10" id="s3"/>
+                                                                            <af:panelGroupLayout id="pgl8"
+                                                                                                 halign="center"
+                                                                                                 valign="middle"
+                                                                                                 styleClass="AFStretchWidth">
+                                                                                <af:outputLabel value="ERROR: El motivo de cambio es requerido."
+                                                                                                id="ol1"
+                                                                                                inlineStyle="color:Red; font-size:medium;"
+                                                                                                />
+                                                                            </af:panelGroupLayout>
+                                                                            <af:spacer width="10" height="10" id="s9"/>
+                                                                            <af:selectOneChoice 
+                                                                                                label="Seleccione Tipo Alerta a Aplicar"
+                                                                                                
+                                                                                                id="soc1">
+                                                                                <f:selectItems 
+                                                                                               id="si1"/>
+                                                                            </af:selectOneChoice>
+                                                                            <af:spacer width="10" height="10" id="s2"/>
+                                                                            <af:inputText label="* Motivo de cambio"
+                                                                                          id="it1" columns="100"
+                                                                                          rows="4"
+                                                                                          
+                                                                                          maximumLength="4000"/>
+                                                                            <af:selectBooleanCheckbox label="Confirmo el cambio de  "
+                                                                                                      id="sbc2"
+                                                                                                      autoSubmit="true"
+                                                                                                      
+                                                                                                      
+                                                                                                      
+                                                                                                      inlineStyle="color:Black; font-weight:bold;"/>
+                                                                        </af:panelGroupLayout>
+                                                                    </f:facet>
+                                                                </af:panelStretchLayout>
+                                                            </af:dialog>
+                                                        </af:popup>
+                                                        <af:popup childCreation="deferred" autoCancel="disabled"
+                                                                  id="p122"
+                                                                  >
+                                                            <af:dialog id="d21" 
+                                                                       type="cancel"
+                                                                       
+                                                                       affirmativeTextAndAccessKey="Aplicar"
+                                                                       cancelTextAndAccessKey="Cancelar">
+                                                                <f:facet name="buttonBar">
+                                                                    <af:button 
+                                                                               id="b7"
+                                                                               partialTriggers="sbc3"
+                                                                               
+                                                                               />
+                                                                </f:facet>
+                                                                <af:panelGroupLayout id="pgl5" layout="vertical">
+                                                                    <af:spacer width="10" height="10" id="s15"/>
+                                                                    <af:panelGroupLayout id="pgl9" halign="center"
+                                                                                         valign="middle"
+                                                                                         styleClass="AFStretchWidth">
+                                                                        <af:outputLabel value="ERROR: El motivo de la operaci&#243;n es requerido."
+                                                                                        id="ol2"
+                                                                                        inlineStyle="color:Red; font-size:medium;"
+                                                                                        />
+                                                                    </af:panelGroupLayout>
+                                                                    <af:spacer width="10" height="10" id="s16"/>
+                                                                    <af:inputText 
+                                                                                  id="it7" columns="100" rows="4"
+                                                                                  
+                                                                                  maximumLength="4000"/>
+                                                                    <af:selectBooleanCheckbox label="Confirmo la operaci&#243;n - "
+                                                                                              id="sbc3"
+                                                                                              
+                                                                                              
+                                                                                              autoSubmit="true"
+                                                                                              />
+                                                                </af:panelGroupLayout>
+                                                                <af:panelStretchLayout id="psl21"
+                                                                                       inlineStyle="width:480px; height:30px;"
+                                                                                       startWidth="5px" endWidth="5px"
+                                                                                       topHeight="5px"
+                                                                                       bottomHeight="5px">
+                                                                    <f:facet name="center">
+                                                                        <af:panelGroupLayout id="pgl181" halign="left"
+                                                                                             valign="middle"
+                                                                                             styleClass="AFStretchWidth"
+                                                                                             layout="vertical"/>
+                                                                    </f:facet>
+                                                                </af:panelStretchLayout>
+                                                            </af:dialog>
+                                                        </af:popup>
+                                                    </af:showDetailItem>
+                                                    <!-- ============================================   TAB SEGUIMIENTO =================================================== -->
+                                                    <af:showDetailItem text="Seguimiento" id="sdi3"
+                                                                       
+                                                                       
+                                                                       stretchChildren="first">
+                                                        <af:panelGroupLayout id="pglSeguimienteo" layout="scroll">
+                                                            
+                                                            <af:panelHeader id="phSeguimiento"
+                                                                            text="Historial de Comentarios"
+                                                                            type="stretch" styleClass="AFStretchWidth"
+                                                                            inlineStyle="height:488px;">
+                                            <af:table value="#{pageFlowScope.Caso.comentarios}" var="row"
+                                                      rowBandingInterval="0" id="t3">
+                                                <af:column sortable="false" headerText="Id" align="end" id="c7" rendered="false">
+                                                    <af:outputText value="#{row.id}" id="ot1"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Nombre Usuario" align="start" id="c8">
+                                                    <af:outputText value="#{row.usuario}" id="ot7"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Fecha Registro" align="start"
+                                                           id="c9">
+                                                    <af:outputText value="#{row.fechaRegistro}" id="ot8"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Es Publico" align="start" rendered="false"
+                                                           id="c10">
+                                                    <af:outputText value="#{row.esPublico}" id="ot9"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Comentario" align="start"
+                                                           id="c11">
+                                                    <af:outputText value="#{row.comentario}" id="ot10"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Severidad" align="end" id="c12" rendered="false">
+                                                    <af:outputText value="#{row.severidad}" id="ot11"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Evento" align="start" id="c13" rendered="false">
+                                                    <af:outputText value="#{row.evento}" id="ot12"/>
+                                                </af:column>
+                                            </af:table>
+                                            <af:spacer width="10" height="10" id="s10"/>
+                                                                <af:outputFormatted value="Comentarios:" id="of2"/>
+                                                                <af:spacer width="10" height="10" id="s11"/>
+                                                                <af:inputText simple="true" id="it3" rows="9"
+                                                                              
+                                                                              
+                                                                              placeholder="Inserta tu comentario . . ."
+                                                                              columns="132"/>
+                                                                <af:spacer width="10" height="10" id="s12"/>
+                                                                <af:selectOneRadio label="Visibilidad :" id="sor1"
+                                                                                   layout="horizontal" required="false"
+                                                                                   
+                                                                                   >
+                                                                    <af:selectItem label="Publico" value="S" id="si3"/>
+                                                                    <af:selectItem label="Privado" value="N" id="si2"/>
+                                                                </af:selectOneRadio>
+                                                                <af:spacer width="10" height="10" id="s13"/>
+                                                                <af:button text="Agregar Comentario" id="b8"
+                                                                           />
+                                                                <af:popup childCreation="deferred" autoCancel="disabled"
+                                                                          id="p2"
+                                                                          >
+                                                                    <af:dialog id="d3" title="Confirmaci&#243;n"
+                                                                               type="cancel"
+                                                                               inlineStyle="Width:300px;Height:110px;"
+                                                                               affirmativeTextAndAccessKey="Guardar"
+                                                                               cancelTextAndAccessKey="Cancelar">
+                                                                        <f:facet name="buttonBar">
+                                                                            <af:commandButton id="cb2" text="Guardar"
+                                                                                              
+                                                                                              inlineStyle="Width:58px;Height:23px;"/>
+                                                                        </f:facet>
+                                                                        <af:outputText value="&#191;Est&#225; seguro de guardar el comentario?"
+                                                                                       id="ot16"/>
+                                                                    </af:dialog>
+                                                                </af:popup>
+                                                                <af:popup childCreation="deferred" autoCancel="disabled"
+                                                                          id="p3"
+                                                                          >
+                                                                    <af:dialog id="d4" title="Success Operation"
+                                                                               inlineStyle="Width:300px;Height:80px;"
+                                                                               type="ok">
+                                                                        <f:facet name="buttonBar"/>
+                                                                    </af:dialog>
+                                                                </af:popup>
+                                        </af:panelHeader>
+                                                        </af:panelGroupLayout>
+                                                    </af:showDetailItem>
+                                                    <!-- ============================================   TAB CASOS RELACIONADOS =================================================== -->
+                                                    <af:showDetailItem text="Casos Relacionados" id="sdi4"
+                                                                       
+                                                                       
+                                                                       stretchChildren="first">
+                                                        <af:panelGroupLayout id="pglCasoRelacionado" layout="vertical">
+                                                            <af:button id="expCasosRel" immediate="true"
+                                                                       text="Exportar a Excel"/>
+                                                            <af:panelCollection id="pcCRel" styleClass="AFStretchWidth"
+                                                                                featuresOff="statusBar viewMenu formatMenu columnsMenuItem freezeMenuItem detachMenuItem sortMenuItem reorderColumnsMenuItem resizeColumnsMenuItem wrapMenuItem freezeToolbarItem  wrapToolbarItem freeze wrap">
+                                            <af:table value="#{pageFlowScope.Caso.casosRelacionados}" var="row"
+                                                      rowBandingInterval="0" id="t4">
+                                                <af:column sortable="false" headerText="Sel" align="start"
+                                                           id="c14">
+                                                    <af:selectBooleanCheckbox id="sbc4"
+                                                                              value="#{row.seleccionado}"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Id Caso" align="end" id="c15">
+                                                    <af:outputText value="#{row.id}" id="ot14"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Id Caso Origen" align="end" rendered="false"
+                                                           id="c16">
+                                                    <af:outputText value="#{row.idCasoOrigen}" id="ot17"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Id Caso Relacionado" align="end" rendered="false"
+                                                           id="c17">
+                                                    <af:outputText value="#{row.idCasoRelacionado}" id="ot18"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Fecha Creaci&#243;n" align="start"
+                                                           id="c18">
+                                                    <af:outputText value="#{row.fechaRegistro}" id="ot19"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Tipo Relacion" align="start"
+                                                           id="c19">
+                                                    <af:outputText value="#{row.tipoRelacion}" id="ot20"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Estado" align="start" id="c20">
+                                                    <af:outputText value="#{row.estado}" id="ot21"/>
+                                                </af:column>
+                                                <af:column sortable="false" headerText="Comentarios" align="start" rendered="false"
+                                                           id="c33">
+                                                    <af:outputText value="#{row.comentarios}" id="ot36"/>
+                                                </af:column>
+                                            </af:table>
+                                        </af:panelCollection>
+                                                        </af:panelGroupLayout>
+                                                        <af:panelGroupLayout id="pgl6" layout="vertical">
+                                                            <af:toolbar id="t5">
+                                                              <af:button text="Cambiar Tipo Relaci&#243;n" id="bctr"
+                                                                            
+                                                                           visible="true"
+                                                                           disabled="true"
+                                                                           >
+                                                                </af:button>
+                                                                <af:button text="Desasociar Caso" id="b9"
+                                                                           disabled="true"
+                                                                           >
+                                                                    <af:showPopupBehavior popupId="p5"/>
+                                                                </af:button>
+                                                                <af:spacer width="10" height="10" id="s14"/>
+                                                                <af:button text="Asociar Caso" id="b1123"
+                                                                           />
+                                                            </af:toolbar>
+                                                        </af:panelGroupLayout>
+                                                        <af:popup childCreation="deferred" autoCancel="disabled" id="p4"
+                                                                  >
+                                                            <af:dialog
+                                                                       type="cancel" title="Cambiar Tipo Relaci&#243;n"
+                                                                       affirmativeTextAndAccessKey="Aplicar"
+                                                                       cancelTextAndAccessKey="Cancelar">
+                                                                <f:facet name="buttonBar">
+                                                                    <af:button text="Cambiar" id="b3Crt"
+                                                                               
+                                                                               partialTriggers="sbc2Crt"/>
+                                                                </f:facet>
+                                                                <af:panelStretchLayout id="psl2Crt"
+                                                                                       inlineStyle="width:480px; height:30px;"
+                                                                                       startWidth="5px" endWidth="5px"
+                                                                                       topHeight="5px"
+                                                                                       bottomHeight="5px">
+                                                                    <f:facet name="center">
+                                                                        <af:panelGroupLayout id="pgl1Crt" halign="left"
+                                                                                             valign="middle"
+                                                                                             styleClass="AFStretchWidth">
+                                                                            <af:spacer width="10" height="10"
+                                                                                       id="s3Crt"/>
+                                                                            <af:panelGroupLayout id="pgl8Crt"
+                                                                                                 halign="center"
+                                                                                                 valign="middle"
+                                                                                                 styleClass="AFStretchWidth">
+                                                                                <af:outputLabel value="ERROR: El motivo de cambio es requerido."
+                                                                                                id="ol1Crt"
+                                                                                                inlineStyle="color:Red; font-size:medium;"
+                                                                                                />
+                                                                            </af:panelGroupLayout>
+                                                                            <af:spacer width="10" height="10"
+                                                                                       id="s9Crt"/>
+                                                                            <af:selectOneChoice 
+                                                                                                label="Seleccione Tipo Relaci&#243;n por Aplicar"
+                                                                                                
+                                                                                                id="soc6"
+                                                                                                >
+                                                                                <f:selectItems 
+                                                                                               id="si8"
+                                                                                               />
+                                                                            </af:selectOneChoice>
+                                                                            <af:spacer width="10" height="10"
+                                                                                       id="s2Crt"/>
+                                                                            <af:inputText label="* Motivo de cambio"
+                                                                                          id="it1Crt" columns="100"
+                                                                                          rows="4"
+                                                                                          
+                                                                                          maximumLength="4000"/>
+                                                                            <af:selectBooleanCheckbox label="Confirmo el cambio de  "
+                                                                                                      id="sbc2Crt"
+                                                                                                      autoSubmit="true"
+                                                                                                      
+                                                                                                      
+                                                                                                      
+                                                                                                      inlineStyle="color:Black; font-weight:bold;"/>
+                                                                        </af:panelGroupLayout>
+                                                                    </f:facet>
+                                                                </af:panelStretchLayout>
+                                                            </af:dialog>
+                                                        </af:popup>
+                                                        <af:popup childCreation="deferred" autoCancel="disabled" id="p5"
+                                                                  >
+                                                            <af:dialog id="d6" title="Confirmaci&#243;n" type="cancel"
+                                                                       inlineStyle="Width:300px;Height:90px;"
+                                                                       affirmativeTextAndAccessKey="Guardar"
+                                                                       cancelTextAndAccessKey="Cancelar">
+                                                                <f:facet name="buttonBar">
+                                                                    <af:button text="Desasociar" id="b10"
+                                                                               />
+                                                                </f:facet>
+                                                                <af:outputText value="&#191;Est&#225; seguro de desasociar los casos?"
+                                                                               id="ot29"/>
+                                                            </af:dialog>
+                                                        </af:popup>
+                                                        <af:popup childCreation="deferred" autoCancel="disabled" id="p6"
+                                                                  >
+                                                            <af:dialog id="d7" title="Success Operation"
+                                                                       inlineStyle="Width:300px;Height:80px;" type="ok">
+                                                                <f:facet name="buttonBar"/>
+                                                            </af:dialog>
+                                                        </af:popup>
+                                                        <af:popup childCreation="deferred" autoCancel="disabled" id="p7"
+                                                                  >
+                                                            <af:dialog id="d8"
+                                                                       
+                                                                       title="B&#250;squeda de Casos a Relacionar">
+                                                                <f:facet name="buttonBar"/>
+                                                                <af:panelStretchLayout id="psl3"
+                                                                                       inlineStyle="width:800px; height:30px;"
+                                                                                       startWidth="5px" endWidth="5px"
+                                                                                       topHeight="5px"
+                                                                                       bottomHeight="5px">
+                                                                    <f:facet name="center">
+                                                                        <af:panelGroupLayout id="pgl10" halign="left"
+                                                                                             valign="middle"
+                                                                                             styleClass="AFStretchWidth"
+                                                                                             layout="vertical">
+                                                                            <af:panelFormLayout id="pfl1" rows="3">
+                                                                                <af:inputText label="Credencial Cliente"
+                                                                                              id="it8"
+                                                                                              />
+                                                                                <af:inputText label="Id Caso" id="it9"
+                                                                                              />
+                                                                                <af:selectOneChoice 
+                                                                                                    label="Tipo Alerta"
+                                                                                                    
+                                                                                                    id="soc2">
+                                                                                    <f:selectItems 
+                                                                                                   id="si4"/>
+                                                                                </af:selectOneChoice>
+                                                                                <af:selectOneChoice 
+                                                                                                    label="Sucursal"
+                                                                                                    
+                                                                                                    id="soc3">
+                                                                                    <f:selectItems 
+                                                                                                   id="si5"/>
+                                                                                </af:selectOneChoice>
+                                                                                <af:inputDate label="Fecha" id="id2"
+                                                                                              />
+                                                                                <af:inputDate label="Fecha Fin" id="id3"
+                                                                                              />
+                                                                            </af:panelFormLayout>
+                                                                            <af:spacer width="10" height="20" id="s17"/>
+                                                                            <af:toolbar id="t6">
+                                                                                <af:button text="Buscar" id="b11"
+                                                                            
+                                                                                           />
+                                                                            </af:toolbar>
+                                                                            <af:spacer width="10" height="20" id="s18"/>
+                                                                            <af:panelCollection id="pcCXRel"
+                                                                                                styleClass="AFStretchWidth"
+                                                                                                featuresOff="statusBar viewMenu formatMenu columnsMenuItem freezeMenuItem detachMenuItem sortMenuItem reorderColumnsMenuItem resizeColumnsMenuItem wrapMenuItem freezeToolbarItem  wrapToolbarItem freeze wrap"/>
+                                                                        </af:panelGroupLayout>
+                                                                    </f:facet>
+                                                                </af:panelStretchLayout>
+                                                            </af:dialog>
+                                                        </af:popup>
+                                                    </af:showDetailItem>
+                                                    <!-- ============================================   TAB GESTION DOCUMENTOS =================================================== -->
+                                                    <af:showDetailItem text="Documentos" id="sdi5"
+                                                                       
+                                                                       
+                                                                       stretchChildren="first">
+                                                        <af:panelGroupLayout id="pglGestionDocumentos" layout="scroll">
+                                        <af:table value="#{pageFlowScope.Caso.documentos}" var="row"
+                                                  rowBandingInterval="0" id="t7">
+                                            <af:column sortable="false" headerText="Id Caso" align="end" id="c21" rendered="false">
+                                                <af:outputText value="#{row.idCaso}" id="ot22"/>
+                                            </af:column>
+                                            <af:column sortable="false" rendered="false" headerText="Id" align="end" id="c22">
+                                                <af:outputText value="#{row.id}" id="ot23"/>
+                                            </af:column>
+                                            <af:column sortable="false" headerText="Nombre" align="start" id="c23">
+                                                <af:outputText value="#{row.nombre}" id="ot24"/>
+                                            </af:column>
+                                            <af:column sortable="false" headerText="Descripcion" align="start" id="c24" rendered="false">
+                                                <af:outputText value="#{row.descripcion}" id="ot25"/>
+                                            </af:column>
+                                            <af:column sortable="false" headerText="Id Tipo" align="start" id="c25" rendered="false">
+                                                <af:outputText value="#{row.idTipo}" id="ot26"/>
+                                            </af:column>
+                                            <af:column sortable="false" headerText="Activo" align="start" id="c26" rendered="false">
+                                                <af:outputText value="#{row.activo}" id="ot27"/>
+                                            </af:column>
+                                            <af:column sortable="false" headerText="Tipo Documento" align="start" rendered="false"
+                                                       id="c27">
+                                                <af:outputText value="#{row.tipoDocumento}" id="ot28"/>
+                                            </af:column>
+                                            <af:column sortable="false" headerText="Fecha Registro" align="start"
+                                                       id="c28">
+                                                <af:outputText value="#{row.fechaRegistro}" id="ot30"/>
+                                            </af:column>
+                                            <af:column sortable="false" headerText="Url" align="start" id="c29" rendered="false">
+                                                <af:outputText value="#{row.url}" id="ot31"/>
+                                            </af:column>
+                                            <af:column sortable="false" headerText="Usuario Carga" align="start"
+                                                       id="c30">
+                                                <af:outputText value="#{row.usuarioCarga}" id="ot32"/>
+                                            </af:column>
+                                            <af:column sortable="false" headerText="Contenido Base64" align="start" rendered="false"
+                                                       id="c31">
+                                                <af:outputText value="#{row.contenidoBase64}" id="ot33"/>
+                                            </af:column>
+                                            <af:column sortable="false" headerText="Tamanio" align="start" id="c32" rendered="false">
+                                                <af:outputText value="#{row.tamanio}" id="ot34"/>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelGroupLayout>
+                                                        <af:panelGroupLayout id="pgl11">
+                                                            <af:selectOneChoice 
+                                                                                
+                                                                                
+                                                                                id="soc4">
+                                                                <f:selectItems 
+                                                                               id="si6"/>
+                                                            </af:selectOneChoice>
+                                                            <af:spacer width="10" height="10" id="s23"/>
+                                                            <af:spacer width="10" height="10" id="s22"/>
+                                                        </af:panelGroupLayout>
+                                                        <af:inputFile id="if1" label="Ingrese un archivo"
+                                                                      
+                                                                      autoSubmit="true"/>
+                                                        <af:button text="Cargar archivo" id="b12"
+                                                                   
+                                                                   
+                                                                   disabled="true"/>
+                                                        <af:panelGroupLayout id="pgl12" layout="horizontal">
+                                                            <af:spacer width="770" height="10" id="s21"/>
+                                                            <af:popup childCreation="deferred" autoCancel="disabled"
+                                                                      id="p8">
+                                                                <af:dialog id="d9"
+                                                                           title="&#191;Est&#225; seguro de subir los archivos adjuntos?"
+                                                                           inlineStyle="Width:320px;Height:80px;"
+                                                                           affirmativeTextAndAccessKey="Aceptar"
+                                                                           cancelTextAndAccessKey="Cancelar">
+                                                                    <f:facet name="buttonBar"/>
+                                                                </af:dialog>
+                                                            </af:popup>
+                                                        </af:panelGroupLayout>
+                                                        <af:popup childCreation="deferred" autoCancel="disabled" id="p9"
+                                                                  >
+                                                            <af:dialog id="d10i" 
+                                                                       
+                                                                       inlineStyle="Width:300px;Height:80px;" type="ok">
+                                                                     <af:outputText 
+                                                                                   id="ot77"/>  
+                                                                <f:facet name="buttonBar"/>
+                                                            </af:dialog>
+                                                        </af:popup>
+                                                    </af:showDetailItem>
+                                                </af:panelTabbed>
+                                          
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                <!-- fin esqueleto -->
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>
